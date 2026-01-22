@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urhobo Encyclopedia - Investor Pitch Deck</title>
+    <meta name="description" content="AI-Powered Urhobo Language Learning Platform - Investor Pitch Deck">
+    <script>
+        window.process = { env: { NODE_ENV: 'production' } };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            overflow: hidden;
+        }
+        
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem 2rem;
+            scroll-snap-align: start;
+        }
+        
+        .slide-container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+            scroll-behavior: smooth;
+        }
+        
+        .slide-container::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .slide-container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #f97316 0%, #ef4444 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .chart-bar {
+            animation: growBar 1.5s ease-out forwards;
+            transform-origin: left;
+        }
+        
+        @keyframes growBar {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        .slide-nav {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .slide-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .slide-dot:hover {
+            background: rgba(255,255,255,0.7);
+            transform: scale(1.2);
+        }
+
+        .slide-dot.active {
+            background: white;
+            transform: scale(1.5);
+            border: 2px solid rgba(255,255,255,0.5);
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        .keyboard-hint {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .keyboard-hint:hover {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 2rem 1rem;
+            }
+            .slide h1 {
+                font-size: 3rem !important;
+            }
+            .slide h2 {
+                font-size: 2.5rem !important;
+            }
+            .slide h3 {
+                font-size: 1.5rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="slide-container" id="slideContainer">
+        
+        <!-- Slide 1: Cover -->
+        <div class="slide bg-gradient-to-br from-orange-600 via-red-600 to-pink-700 text-white">
+            <div class="max-w-6xl mx-auto text-center space-y-8 animate-fade-in">
+                <img src="https://i.imgur.com/gHERz3o.png" alt="UrhoboPedia Logo" class="w-48 h-48 mx-auto mb-8 animate-pulse">
+                <h1 class="text-7xl font-black mb-6">URHOBO ENCYCLOPEDIA</h1>
+                <p class="text-3xl font-light mb-12">AI-Powered Language Learning Platform</p>
+                <div class="flex flex-wrap gap-6 justify-center items-center text-xl">
+                    <div class="flex items-center gap-2">
+                        <span>🌍</span>
+                        <span>Cultural Preservation</span>
+                    </div>
+                    <div class="w-2 h-2 bg-white rounded-full"></div>
+                    <div class="flex items-center gap-2">
+                        <span>🤖</span>
+                        <span>AI Technology</span>
+                    </div>
+                    <div class="w-2 h-2 bg-white rounded-full"></div>
+                    <div class="flex items-center gap-2">
+                        <span>💰</span>
+                        <span>Scalable Revenue</span>
+                    </div>
+                </div>
+                <div class="mt-12 pt-12 border-t border-white/30">
+                    <p class="text-xl opacity-90">Preserving African Heritage Through Technology</p>
+                    <p class="text-lg opacity-70 mt-2">January 2025</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: The Problem -->
+        <div class="slide bg-white">
+            <div class="max-w-6xl mx-auto w-full">
+                <h2 class="text-6xl font-black mb-12 text-gray-900">THE PROBLEM 🚨</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-red-50 border-4 border-red-500 rounded-3xl p-8 hover:shadow-2xl transition-all">
+                        <div class="text-5xl mb-4">⚠️</div>
+                        <h3 class="text-3xl font-bold text-red-600 mb-4">Language Extinction Crisis</h3>
+                        <ul class="space-y-3 text-xl text-gray-700">
+                            <li>• 3,000+ African languages at risk</li>
+                            <li>• 90% could disappear by 2100</li>
+                            <li>• Urhobo: 2M speakers, declining</li>
+                            <li>• Younger generation losing fluency</li>
+                        </ul>
+                    </div>
+                    <div class="bg-orange-50 border-4 border-orange-500 rounded-3xl p-8 hover:shadow-2xl transition-all">
+                        <div class="text-5xl mb-4">📚</div>
+                        <h3 class="text-3xl font-bold text-orange-600 mb-4">Limited Learning Resources</h3>
+                        <ul class="space-y-3 text-xl text-gray-700">
+                            <li>• No modern digital platforms</li>
+                            <li>• Outdated textbooks only</li>
+                            <li>• No interactive learning tools</li>
+                            <li>• Diaspora disconnected from roots</li>
+                        </ul>
+                    </div>
+                    <div class="bg-purple-50 border-4 border-purple-500 rounded-3xl p-8 hover:shadow-2xl transition-all">
+                        <div class="text-5xl mb-4">🌐</div>
+                        <h3 class="text-3xl font-bold text-purple-600 mb-4">Cultural Knowledge Loss</h3>
+                        <ul class="space-y-3 text-xl text-gray-700">
+                            <li>• Traditional stories disappearing</li>
+                            <li>• Elders passing without recording</li>
+                            <li>• Artifacts not documented</li>
+                            <li>• No centralized archive</li>
+                        </ul>
+                    </div>
+                    <div class="bg-blue-50 border-4 border-blue-500 rounded-3xl p-8 hover:shadow-2xl transition-all">
+                        <div class="text-5xl mb-4">💔</div>
+                        <h3 class="text-3xl font-bold text-blue-600 mb-4">Generational Gap</h3>
+                        <ul class="space-y-3 text-xl text-gray-700">
+                            <li>• Youth prefer English</li>
+                            <li>• Parents can't teach effectively</li>
+                            <li>• Schools don't offer Urhobo</li>
+                            <li>• Identity crisis in diaspora</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: The Solution -->
+        <div class="slide bg-gradient-to-br from-blue-600 to-purple-700 text-white">
+            <div class="max-w-6xl mx-auto w-full">
+                <h2 class="text-6xl font-black mb-12">OUR SOLUTION 💡</h2>
+                <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-12 mb-8">
+                    <h3 class="text-4xl font-bold mb-6">World's First AI-Powered Urhobo Learning Platform</h3>
+                    <p class="text-2xl leading-relaxed opacity-90">
+                        A comprehensive digital ecosystem combining language learning, cultural preservation, 
+                        and community engagement through cutting-edge AI technology.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-white/20 backdrop-blur rounded-2xl p-6">
+                        <div class="text-5xl mb-4">🤖</div>
+                        <h4 class="text-2xl font-bold mb-3">AI Tutor (Claude Sonnet 4)</h4>
+                        <p class="text-lg opacity-90">Real-time pronunciation feedback, personalized learning paths</p>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur rounded-2xl p-6">
+                        <div class="text-5xl mb-4">📚</div>
+                        <h4 class="text-2xl font-bold mb-3">Cultural Archive</h4>
+                        <p class="text-lg opacity-90">Stories, videos, 3D artifacts, oral histories preserved digitally</p>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur rounded-2xl p-6">
+                        <div class="text-5xl mb-4">🎓</div>
+                        <h4 class="text-2xl font-bold mb-3">Certification Program</h4>
+                        <p class="text-lg opacity-90">Official Urhobo language proficiency certificates</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Product Features -->
+        <div class="slide bg-white">
+            <div class="max-w-6xl mx-auto w-full">
+                <h2 class="text-6xl font-black mb-12 gradient-text">PRODUCT FEATURES 🚀</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-gradient-to-br from-orange-500 to-red-600 text-white rounded-2xl p-6 stat-card">
+                        <div class="text-4xl mb-3">📖</div>
+                        <h3 class="text-2xl font-bold mb-2">100+ Vocabulary Words</h3>
+                        <p class="opacity-90">11 categories with audio pronunciation</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-2xl p-6 stat-card">
+                        <div class="text-4xl mb-3">🎬</div>
+                        <h3 class="text-2xl font-bold mb-2">Video Library</h3>
+                        <p class="opacity-90">6 cultural videos with subtitles</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-500 to-pink-600 text-white rounded-2xl p-6 stat-card">
+                        <div class="text-4xl mb-3">🏺</div>
+                        <h3 class="text-2xl font-bold mb-2">3D Artifacts</h3>
+                        <p class="opacity-90">Interactive 360° cultural items</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-green-500 to-emerald-600 text-white rounded-2xl p-6 stat-card">
+                        <div class="text-4xl mb-3">👥</div>
+                        <h3 class="text-2xl font-bold mb-2">Live Group Sessions</h3>
+                        <p class="opacity-90">AI-moderated conversation practice</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-yellow-500 to-orange-600 text-white rounded-2xl p-6 stat-card">
+                        <div class="text-4xl mb-3">🎓</div>
+                        <h3 class="text-2xl font-bold mb-2">Certification</h3>
+                        <p class="opacity-90">Beginner to Advanced levels</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-teal-500 to-cyan-600 text-white rounded-2xl p-6 stat-card">
+                        <div class="text-4xl mb-3">📵</div>
+                        <h3 class="text-2xl font-bold mb-2">Offline Mode</h3>
+                        <p class="opacity-90">Download & learn anywhere</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Market Opportunity -->
+        <div class="slide bg-gray-900 text-white">
+            <div class="max-w-6xl mx-auto w-full">
+                <h2 class="text-6xl font-black mb-12">MARKET OPPORTUNITY 📊</h2>
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-4xl font-bold mb-8 text-orange-400">Target Market</h3>
+                        <div class="space-y-6">
+                            <div class="bg-white/10 rounded-xl p-6">
+                                <div class="text-5xl font-black text-orange-400 mb-2">2M+</div>
+                                <p class="text-xl">Native Urhobo speakers</p>
+                            </div>
+                            <div class="bg-white/10 rounded-xl p-6">
+                                <div class="text-5xl font-black text-blue-400 mb-2">5M+</div>
+                                <p class="text-xl">Nigerian diaspora globally</p>
+                            </div>
+                            <div class="bg-white/10 rounded-xl p-6">
+                                <div class="text-5xl font-black text-green-400 mb-2">10M+</div>
+                                <p class="text-xl">Language learning enthusiasts</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-4xl font-bold mb-8 text-purple-400">Market Size</h3>
+                        <div class="bg-white/10 rounded-2xl p-8">
+                            <div class="mb-8">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-lg">EdTech Market (Africa)</span>
+                                    <span class="font-bold">$4.5B</span>
+                                </div>
+                                <div class="h-4 bg-gray-700 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-orange-500 to-red-600 chart-bar" style="width: 90%;"></div>
+                                </div>
+                            </div>
+                            <div class="mb-8">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-lg">Language Learning Apps</span>
+                                    <span class="font-bold">$12B</span>
+                                </div>
+                                <div class="h-4 bg-gray-700 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-blue-500 to-purple-600 chart-bar" style="width: 100%; animation-delay: 0.2s;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-lg">Cultural Preservation</span>
+                                    <span class="font-bold">$2.3B</span>
+                                </div>
+                                <div class="h-4 bg-gray-700 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-green-500 to-emerald-600 chart-bar" style="width: 50%; animation-delay: 0.4s;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8 text-center">
+                            <p class="text-3xl font-black text-yellow-400">TAM: $18.8B</p>
+                            <p class="text-lg opacity-75">Growing 23% annually</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Business Model -->
+        <div class="slide bg-gradient-to-br from-green-600 to-emerald-700 text-white">
+            <div class="max-w-6xl mx-auto w-full">
+                <h2 class="text-6xl font-black mb-12">BUSINESS MODEL 💰</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                    <div class="bg-white/20 backdrop-blur rounded-2xl p-6 text-center">
+                        <div class="text-4xl mb-3">🆓</div>
+                        <h3 class="text-2xl font-bold mb-2">FREE</h3>
+                        <div class="text-4xl font-black mb-4">$0</div>
+                        <ul class="text-sm space-y-2 opacity-90 text-left">
+                            <li>✓ 5 lessons/month</li>
+                            <li>✓ Basic vocabulary</li>
+                            <li>✓ Community access</li>
+                            <li>⚠️ With ads</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur rounded-2xl p-6 text-center">
+                        <div class="text-4xl mb-3">📘</div>
+                        <h3 class="text-2xl font-bold mb-2">BASIC</h3>
+                        <div class="text-4xl font-black mb-4">$4.99</div>
+                        <ul class="text-sm space-y-2 opacity-90 text-left">
+                            <li>✓ Unlimited lessons</li>
+                            <li>✓ AI Tutor (50/day)</li>
+                            <li>✓ All stories & videos</li>
+                            <li>⚠️ Limited ads</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white/30 backdrop-blur rounded-2xl p-6 text-center border-4 border-yellow-400 relative">
+                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-yellow-400 text-gray-900 px-4 py-1 rounded-full text-sm font-bold">POPULAR</div>
+                        <div class="text-4xl mb-3">⭐</div>
+                        <h3 class="text-2xl font-bold mb-2">PREMIUM</h3>
+                        <div class="text-4xl font-black mb-4">$9.99</div>
+                        <ul class="text-sm space-y-2 opacity-90 text-left">
+                            <li>✓ Everything in Basic</li>
+                            <li>✓ Unlimited AI Tutor</li>
+                            <li>✓ 3D Artifacts</li>
+                            <li>✓ Certification</li>
+                            <li>✓ Ad-free</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur rounded-2xl p-6 text-center">
+                        <div class="text-4xl mb-3">💎</div>
+                        <h3 class="text-2xl font-bold mb-2">LIFETIME</h3>
+                        <div class="text-4xl font-black mb-4">$199</div>
+                        <ul class="text-sm space-y-2 opacity-90 text-left">
+                            <li>✓ All Premium features</li>
+                            <li>✓ Forever access</li>
+                            <li>✓ Family sharing (5)</li>
+                            <li>✓ Priority support</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-white/10 rounded-xl p-6">
+                        <h4 class="text-2xl font-bold mb-3">📢 Advertising</h4>
+                        <p class="opacity-90">Google AdSense, Media.net</p>
+                        <p class="text-2xl font-bold mt-2">$5K-$10K/mo</p>
+                    </div>
+                    <div class="bg-white/10 rounded-xl p-6">
+                        <h4 class="text-2xl font-bold mb-3">🤝 Affiliate Program</h4>
+                        <p class="opacity-90">20-35% commission</p>
+                        <p class="text-2xl font-bold mt-2">$2K-$10K/mo</p>
+                    </div>
+                    <div class="bg-white/10 rounded-xl p-6">
+                        <h4 class="text-2xl font-bold mb-3">🎓 B2B Licensing</h4>
+                        <p class="opacity-90">Schools, institutions</p>
+                        <p class="text-2xl font-bold mt-2">$10K-$50K/mo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Revenue Projections -->
+        <div class="slide bg-white">
+            <div class="max-w-6xl mx-auto w-full">
+                <h2 class="text-6xl font-black mb-12 gradient-text">REVENUE PROJECTIONS 📈</h2>
+                <div class="grid md:grid-cols-3 gap-8 mb-12">
+                    <div class="bg-blue-50 rounded-2xl p-8 border-4 border-blue-500">
+                        <h3 class="text-3xl font-bold mb-4 text-blue-600">Year 1</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-gray-600">Users</p>
+                                <p class="text-3xl font-bold">10,000</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600">Paying Subscribers</p>
+                                <p class="text-3xl font-bold">650</p>
+                            </div>
+                            <div class="pt-4 border-t-2 border-blue-300">
+                                <p class="text-gray-600">Monthly Revenue</p>
+                                <p class="text-4xl font-black text-blue-600">$60K</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600">Annual Revenue</p>
+                                <p class="text-4xl font-black text-blue-600">$720K</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-purple-50 rounded-2xl p-8 border-4 border-purple-500">
+                        <h3 class="text-3xl font-bold mb-4 text-purple-600">Year 2</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-gray-600">Users</p>
+                                <p class="text-3xl font-bold">50,000</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600">Paying Subscribers</p>
+                                <p class="text-3xl font-bold">5,000</p>
+                            </div>
+                            <div class="pt-4 border-t-2 border-purple-300">
+                                <p class="text-gray-600">Monthly Revenue</p>
+                                <p class="text-4xl font-black text-purple-600">$350K</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600">Annual Revenue</p>
+                                <p class="text-4xl font-black text-purple-600">$4.2M</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-green-50 rounded-2xl p-8 border-4 border-green-500">
+                        <h3 class="text-3xl font-bold mb-4 text-green-600">Year 3</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-gray-600">Users</p>
+                                <p class="text-3xl font-bold">200,000</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600">Paying Subscribers</p>
+                                <p class="text-3xl font-bold">30,000</p>
+                            </div>
+                            <div class="pt-4 border-t-2 border-green-300">
+                                <p class="text-gray-600">Monthly Revenue</p>
+                                <p class="text-4xl font-black text-green-600">$2M</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600">Annual Revenue</p>
+                                <p class="text-4xl font-black text-green-600">$24M</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl p-8 text-center text-gray-900">
+                    <p class="text-2xl font-bold mb-2">3-Year Total Revenue Potential</p>
+                    <p class="text-7xl font-black">$28.9M</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Team & Contact -->
+        <div class="slide bg-gradient-to-br from-orange-600 via-red-600 to-pink-700 text-white">
+            <div class="max-w-6xl mx-auto w-full text-center">
+                <h2 class="text-6xl font-black mb-12">LET'S BUILD THE FUTURE 🚀</h2>
+                <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-12 mb-12">
+                    <h3 class="text-4xl font-bold mb-8">We're Seeking Investment</h3>
+                    <div class="grid md:grid-cols-3 gap-8 text-left">
+                        <div>
+                            <p class="text-xl opacity-75 mb-2">Investment Ask</p>
+                            <p class="text-5xl font-black">$500K</p>
+                        </div>
+                        <div>
+                            <p class="text-xl opacity-75 mb-2">Use of Funds</p>
+                            <ul class="text-lg space-y-1">
+                                <li>• Product development</li>
+                                <li>• Marketing & user acquisition</li>
+                                <li>• Team expansion</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="text-xl opacity-75 mb-2">Expected ROI</p>
+                            <p class="text-5xl font-black">10X</p>
+                            <p class="text-lg opacity-75">Within 3 years</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <img src="https://i.imgur.com/PVjr5eV.png" alt="Happy Igho Umukoro" class="w-32 h-32 rounded-full mx-auto border-4 border-white shadow-2xl object-cover">
+                    <p class="text-3xl font-bold">Founder & Product Lead</p>
+                    <p class="text-xl opacity-90">Happy Igho Umukoro</p>
+                    <div class="flex flex-wrap justify-center gap-6 text-lg">
+                        <span>📧 princeigho74@gmail.com</span>
+                        <span>📱 +234 806 520 2102</span>
+                        <span>🌍 Nigeria / Global</span>
+                    </div>
+                    <p class="text-lg opacity-75 mt-8">
+                        Preserving Urhobo culture. Empowering the next generation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide Navigation Dots -->
+    <div class="slide-nav" id="slideNav"></div>
+
+    <!-- Keyboard Hint -->
+    <div class="keyboard-hint">
+        ⬆️ ⬇️ Use arrow keys to navigate
+    </div>
+
+    <!-- JavaScript: Slide Navigation -->
+    <script>
+        const container = document.getElementById('slideContainer');
+        const slides = document.querySelectorAll('.slide');
+        const nav = document.getElementById('slideNav');
+
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.className = 'slide-dot';
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                slides[index].scrollIntoView({ behavior: 'smooth' });
+            });
+            nav.appendChild(dot);
+        });
+
+        container.addEventListener('scroll', () => {
+            let index = Math.round(container.scrollTop / window.innerHeight);
+            document.querySelectorAll('.slide-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            let index = Math.round(container.scrollTop / window.innerHeight);
+            if (e.key === 'ArrowDown' && index < slides.length - 1) {
+                slides[index + 1].scrollIntoView({ behavior: 'smooth' });
+            }
+            if (e.key === 'ArrowUp' && index > 0) {
+                slides[index - 1].scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    </script>
+
+</body>
+</html
